@@ -2,7 +2,7 @@ provider "azurerm" {
   features {}
 
 }
-
+#checking changes
 resource "azurerm_resource_group" "example" {
   name     = "codespaces-az"
   location = "East US"
