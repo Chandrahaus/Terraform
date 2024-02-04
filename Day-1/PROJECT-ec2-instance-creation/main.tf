@@ -1,8 +1,21 @@
-provider "aws" {
-    region = "us-east-1"  # Set your desired AWS region
+provider "azurerm" {
+  features {}
+
 }
 
-resource "aws_instance" "example" {
-    ami           = "ami-0c55b159cbfafe1f0"  # Specify an appropriate AMI ID
-    instance_type = "t2.micro"
+resource "azurerm_resource_group" "example" {
+  name     = "codespaces-az"
+  location = "East US"
+}
+
+resource "azurerm_storage_account" "example" {
+  name                     = "codespacesstorage"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+
+  tags = {
+    environment = "staging"
+  }
 }
